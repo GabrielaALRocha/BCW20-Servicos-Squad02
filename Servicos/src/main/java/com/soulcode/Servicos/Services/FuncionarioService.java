@@ -88,4 +88,13 @@ public class FuncionarioService {
         funcionario.setFoto(caminhoFoto);
         return funcionarioRepository.save(funcionario);
     }
+
+
+
+    //findfuncionariosbycaroo
+    @Cacheable(value = "funcionariosCache")
+    public List<Funcionario> buscarFuncionariosPorCargo(String nomeCargo){
+        Optional<Cargo> cargo = cargoRepository.findByNome(nomeCargo);
+        return funcionarioRepository.findByCargo(cargo);
+    }
 }
